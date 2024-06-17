@@ -3,7 +3,6 @@ package com.banquemisr.challenge05.presenter.movieslist
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -56,8 +55,7 @@ private fun MovieImage() {
 @Composable
 private fun MovieTitle() {
     Text(
-        modifier = Modifier
-            .padding(horizontal = 8.dp),
+        modifier = Modifier.padding(horizontal = 8.dp),
         textAlign = TextAlign.Center,
         text = "titkkkkkkkkkkkkkkkkkkkkkle",
         style = TextStyle(
@@ -72,12 +70,14 @@ private fun MovieTitle() {
 
 @Composable
 private fun MovieDate() {
-    Text(text = "releaseDate", style = TextStyle(
-        fontSize = typography.labelMedium.fontSize,
-        fontWeight = typography.labelMedium.fontWeight,
-        color = MaterialTheme.colorScheme.primary,
-        fontFamily = typography.labelMedium.fontFamily
-    ))
+    Text(
+        text = "releaseDate", style = TextStyle(
+            fontSize = typography.labelMedium.fontSize,
+            fontWeight = typography.labelMedium.fontWeight,
+            color = MaterialTheme.colorScheme.primary,
+            fontFamily = typography.labelMedium.fontFamily
+        )
+    )
 
 }
 
