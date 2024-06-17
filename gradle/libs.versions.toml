@@ -6,7 +6,7 @@ constraintlayoutCompose = "1.0.1"
 fragmentKtx = "1.6.1"
 grpcOkhttp = "1.52.1"
 koinAndroid = "3.5.0"
-kotlin = "1.9.0"
+kotlin = "1.9.23"
 coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -40,8 +40,8 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }
-koin-androidx-scope = { module = "io.insert-koin:koin-androidx-scope", version.ref = "koinAndroid" }
-koin-androidx-viewmodel = { module = "io.insert-koin:koin-androidx-viewmodel", version.ref = "koinAndroid" }
+#koin-androidx-scope = { module = "io.insert-koin:koin-androidx-scope", version.ref = "koinAndroid" }
+#koin-androidx-viewmodel = { module = "io.insert-koin:koin-androidx-viewmodel", version.ref = "koinAndroid" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinAndroid" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }

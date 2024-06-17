@@ -37,6 +37,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.13"
     }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
@@ -57,8 +60,8 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.koin.android)
-    implementation(libs.koin.androidx.scope)
-    implementation(libs.koin.androidx.viewmodel)
+//    implementation(libs.koin.androidx.scope)
+//    implementation(libs.koin.androidx.viewmodel)
     testImplementation(libs.koin.test)
 
 
