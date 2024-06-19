@@ -60,8 +60,8 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.koin.android)
-//    implementation(libs.koin.androidx.scope)
-//    implementation(libs.koin.androidx.viewmodel)
+    implementation(libs.koin.androidx.scope)
+    implementation(libs.koin.androidx.viewmodel)
     testImplementation(libs.koin.test)
 
 
@@ -69,6 +69,10 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.retrofit2.retrofit)
     implementation(libs.grpc.okhttp)
+
+    //OKHTTP
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.okhttp3.logging)
 
     //Compose ui
     implementation(platform(libs.androidx.compose.bom))
