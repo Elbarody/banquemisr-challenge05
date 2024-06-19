@@ -20,10 +20,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import com.banquemisr.challenge05.R
+import com.banquemisr.challenge05.data.entity.MovieListItem
+import com.banquemisr.challenge05.utility.network.RemoteConstants
 
 @Composable
-fun MovieItem() {
+fun MovieItem(movieListItem: MovieListItem) {
     Card {
         Column(
             modifier = Modifier
@@ -32,18 +36,18 @@ fun MovieItem() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            MovieImage()
-            MovieTitle()
-            MovieDate()
+            MovieImage(movieListItem.image)
+            MovieTitle(movieListItem.title)
+            MovieDate(movieListItem.releaseDate)
         }
     }
 }
 
 @Composable
-private fun MovieImage() {
+private fun MovieImage(image: String) {
     Image(
         // todo Replace test image with imageUrl
-        painter = painterResource(id = R.drawable.ic_launcher_background),
+        painter = rememberAsyncImagePainter(model = image),
         contentScale = ContentScale.FillBounds,
         contentDescription = "Movie poster",
         modifier = Modifier
@@ -53,11 +57,11 @@ private fun MovieImage() {
 }
 
 @Composable
-private fun MovieTitle() {
+private fun MovieTitle(title: String) {
     Text(
         modifier = Modifier.padding(horizontal = 8.dp),
         textAlign = TextAlign.Center,
-        text = "titkkkkkkkkkkkkkkkkkkkkkle",
+        text = title,
         style = TextStyle(
             fontSize = typography.titleMedium.fontSize,
             fontWeight = typography.titleMedium.fontWeight,
@@ -69,9 +73,9 @@ private fun MovieTitle() {
 }
 
 @Composable
-private fun MovieDate() {
+private fun MovieDate(releaseDate: String) {
     Text(
-        text = "releaseDate", style = TextStyle(
+        text = releaseDate, style = TextStyle(
             fontSize = typography.labelMedium.fontSize,
             fontWeight = typography.labelMedium.fontWeight,
             color = MaterialTheme.colorScheme.primary,
@@ -84,5 +88,5 @@ private fun MovieDate() {
 @Composable
 @Preview
 private fun MovieItemPreview() {
-    MovieItem()
+    MovieItem(movieListItem = MovieListItem(0,"","",""))
 }
