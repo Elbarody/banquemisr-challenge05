@@ -18,6 +18,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            buildConfigField(
+                "String",
+                "TMDB_API_KEY",
+                "\"${project.property("TMDB_API_KEY")}\""
+            )
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -25,6 +37,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -60,8 +76,7 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.koin.android)
-    implementation(libs.koin.androidx.scope)
-    implementation(libs.koin.androidx.viewmodel)
+    implementation(libs.koin.compose)/*implementation(libs.koin.androidx.viewmodel)*/
     testImplementation(libs.koin.test)
 
 
@@ -84,4 +99,7 @@ dependencies {
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
 }

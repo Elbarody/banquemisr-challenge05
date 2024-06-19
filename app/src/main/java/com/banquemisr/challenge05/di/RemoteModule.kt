@@ -7,6 +7,7 @@ import com.banquemisr.challenge05.utility.network.RemoteConstants
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.BuildConfig
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,8 +27,8 @@ val remoteModule = module{
             .protocols(protocols)
 
         if (BuildConfig.DEBUG) {
-            builder.addNetworkInterceptor(get<HttpLoggingInterceptor>())
             builder.addInterceptor(MockInterceptor())
+            builder.addNetworkInterceptor(get<HttpLoggingInterceptor>())
         }
         builder.build()
     }
