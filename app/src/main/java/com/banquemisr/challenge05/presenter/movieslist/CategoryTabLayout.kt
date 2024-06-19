@@ -33,7 +33,8 @@ fun CategoriesTabLayout(content: @Composable (Int) -> Unit) {
                 .fillMaxWidth()
                 .weight(1f),
             beyondBoundsPageCount = list.size,
-            state = pagerState
+            state = pagerState,
+            userScrollEnabled = false
         ) { _ ->
             content(pagerState.currentPage)
         }

@@ -18,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -31,7 +32,7 @@ fun MovieItem(movieListItem: MovieListItem) {
     Card {
         Column(
             modifier = Modifier
-                .width(150.dp)
+                .width(200.dp)
                 .padding(bottom = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -52,7 +53,7 @@ private fun MovieImage(image: String) {
         contentDescription = "Movie poster",
         modifier = Modifier
             .fillMaxWidth()
-            .height(height = 200.dp)
+            .height(height = 300.dp)
     )
 }
 
@@ -62,6 +63,10 @@ private fun MovieTitle(title: String) {
         modifier = Modifier.padding(horizontal = 8.dp),
         textAlign = TextAlign.Center,
         text = title,
+        maxLines = 2,
+        minLines = 2,
+        overflow = TextOverflow.Ellipsis,
+
         style = TextStyle(
             fontSize = typography.titleMedium.fontSize,
             fontWeight = typography.titleMedium.fontWeight,
