@@ -1,6 +1,7 @@
 package com.banquemisr.challenge05.presenter.moviedetails
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,27 +16,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.banquemisr.challenge05.R
+import com.banquemisr.challenge05.data.entity.moviedetails.MovieDetails
 import com.banquemisr.challenge05.utility.formatDateToMonthDayYear
 import com.banquemisr.challenge05.utility.formatToMinutesAndHours
 import com.banquemisr.challenge05.utility.uitheme.MovieTypography
 
 @Composable
-fun RunTimeAndReleaseDate() {
-    Row(
+fun RunTimeAndReleaseDate(movieDetails: MovieDetails) {
+    Column(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        RunTimeData()
-        ReleaseDateData()
+        RunTimeData(movieDetails.runtime)
+        ReleaseDateData(movieDetails.releaseDate)
     }
 }
 
 @Composable
-fun RunTimeData(){
+fun RunTimeData(runtime: Int?) {
     val spannableString = buildAnnotatedString{
         val style = SpanStyle(
             color = MovieTypography.titleSmall.color,
@@ -48,7 +50,7 @@ fun RunTimeData(){
         }
         pushStyle(style)
         withStyle(style.copy(fontWeight = FontWeight.Normal)){
-            append(formatToMinutesAndHours(5))
+            append(runtime?.let { formatToMinutesAndHours(it) })
         }
     }
 
@@ -57,7 +59,7 @@ fun RunTimeData(){
 }
 
 @Composable
-fun ReleaseDateData(){
+fun ReleaseDateData(releaseDate: String?) {
     val spannableString = buildAnnotatedString{
         val style = SpanStyle(
             color = MovieTypography.titleSmall.color,
@@ -70,7 +72,7 @@ fun ReleaseDateData(){
         }
         pushStyle(style)
         withStyle(style.copy(fontWeight = FontWeight.Normal)){
-            append(formatDateToMonthDayYear("2023-01-01"))
+            append(formatDateToMonthDayYear(releaseDate.orEmpty()))
         }
     }
 
