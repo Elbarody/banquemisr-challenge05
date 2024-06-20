@@ -12,28 +12,52 @@ import kotlinx.coroutines.launch
 
 class MoviesListViewModel(private val moviesListRepo: MoviesListRepo) : ViewModel() {
 
-    private val _state = MutableStateFlow(MovieCollectionState())
-    val state: StateFlow<MovieCollectionState> = _state.asStateFlow()
+    private val _stateNowDisplay = MutableStateFlow(MovieCollectionState())
+    val stateNowDisplay: StateFlow<MovieCollectionState> = _stateNowDisplay.asStateFlow()
 
-    fun fetchPopularMovies() {
-        val currentPage: Int = state.value.currentPage/*val totalPages: Int? = state.value.totalPages
+    private val _statePopular = MutableStateFlow(MovieCollectionState())
+    val statePopular: StateFlow<MovieCollectionState> = _statePopular.asStateFlow()
 
-        if (totalPages != null && currentPage >= totalPages) return
-*/
-        //val nextPage: Int = if (totalPages == null) 1 else currentPage.plus(1)
+    private val _stateUpcoming = MutableStateFlow(MovieCollectionState())
+    val stateUpcoming: StateFlow<MovieCollectionState> = _stateUpcoming.asStateFlow()
+
+    fun fetchListMovies(type: String) {
+        val currentPage: Int = when (type) {
+            MovieListType.NOW_PLAYING.type -> _stateNowDisplay.value.currentPage
+            MovieListType.POPULAR.type -> _statePopular.value.currentPage
+            MovieListType.UPCOMING.type -> _stateUpcoming.value.currentPage
+            else -> 1
+        }
+
+        val totalPages: Int? = when (type) {
+            MovieListType.NOW_PLAYING.type -> _stateNowDisplay.value.totalPages
+            MovieListType.POPULAR.type -> _statePopular.value.totalPages
+            MovieListType.UPCOMING.type -> _stateUpcoming.value.totalPages
+            else -> null
+        }
+
+        /*if (totalPages != null && currentPage >= totalPages) return*/
+
+        val nextPage: Int = if (totalPages == null) 1 else currentPage.plus(1)
 
         viewModelScope.launch {
             kotlin.runCatching {
-                moviesListRepo.getMoviesList("popular", 1)
-            }.onSuccess {moviesResponse ->
-                val moviesState = _state
-
-                _state.update {
-                    it.copy(
-                        movies = (moviesState.value.movies + moviesResponse.moviesList),
-                    )
+                moviesListRepo.getMoviesList(type, nextPage)
+            }.onSuccess { moviesResponse ->
+                val moviesState = when (type) {
+                    MovieListType.NOW_PLAYING.type -> _stateNowDisplay
+                    MovieListType.POPULAR.type -> _statePopular
+                    MovieListType.UPCOMING.type -> _stateUpcoming
+                    else -> return@launch
                 }
 
+                moviesState.update {
+                    it.copy(
+                        movies = (it.movies + moviesResponse.moviesList),
+                        currentPage = nextPage,
+                        totalPages = moviesResponse.totalPages
+                    )
+                }
             }.onFailure {
                 NavHomeViewModelSideEffect.ShowErrorToast(it.message)
             }
@@ -49,4 +73,10 @@ data class MovieCollectionState(
 
 sealed class NavHomeViewModelSideEffect {
     data class ShowErrorToast(val message: String? = null) : NavHomeViewModelSideEffect()
+}
+
+enum class MovieListType(val type: String) {
+     NOW_PLAYING("now_playing"),
+     POPULAR("popular"),
+     UPCOMING("upcoming")
 }

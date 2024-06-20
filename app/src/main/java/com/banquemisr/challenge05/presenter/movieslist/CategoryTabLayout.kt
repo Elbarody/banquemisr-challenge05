@@ -9,14 +9,18 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.banquemisr.challenge05.R
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CategoriesTabLayout(content: @Composable (Int) -> Unit) {
 
-    val list = listOf("categories", "categories 2", "categories 3")
+    val list = listOf(stringResource(R.string.now_playing),
+        stringResource(R.string.popular), stringResource(R.string.upcoming)
+    )
 
     val pagerState = rememberPagerState(pageCount = { list.size })
 

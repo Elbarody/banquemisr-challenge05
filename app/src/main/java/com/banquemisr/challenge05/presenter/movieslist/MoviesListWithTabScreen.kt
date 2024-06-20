@@ -20,20 +20,34 @@ fun MoviesListWithTabScreen(
     viewModel: MoviesListViewModel,
     onNavigateToMyScreen: () -> Unit
 ){
-    val state by viewModel.state.collectAsState()
+    val stateNowDisplay by viewModel.stateNowDisplay.collectAsState()
+    val statePopular by viewModel.statePopular.collectAsState()
+    val stateUpcoming by viewModel.stateUpcoming.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.fetchPopularMovies()
+    var listType by remember { mutableStateOf(MovieListType.NOW_PLAYING.type) }
+
+    LaunchedEffect(listType) {
+        viewModel.fetchListMovies(listType)
     }
 
     Scaffold {
         Column(modifier = Modifier.padding(it)) {
-            CategoriesTabLayout {
-                MoviesList(state.movies)
+            CategoriesTabLayout { page ->
+                listType = when (page) {
+                    0 -> MovieListType.NOW_PLAYING.type
+                    1 -> MovieListType.POPULAR.type
+                    2 -> MovieListType.UPCOMING.type
+                    else -> listType
+                }
+
+                when (listType) {
+                    MovieListType.NOW_PLAYING.type -> MoviesList(stateNowDisplay.movies)
+                    MovieListType.POPULAR.type -> MoviesList(statePopular.movies)
+                    MovieListType.UPCOMING.type -> MoviesList(stateUpcoming.movies)
+                }
             }
         }
     }
-
 }
 
 @Composable
