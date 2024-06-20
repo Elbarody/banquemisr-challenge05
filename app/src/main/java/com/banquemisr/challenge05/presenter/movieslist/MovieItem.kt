@@ -43,7 +43,6 @@ fun MovieItem(movieListItem: MovieListItem, onItemClick: (Int) -> Unit) {
 @Composable
 private fun MovieImage(image: String) {
     Image(
-        // todo Replace test image with imageUrl
         painter = rememberAsyncImagePainter(model = image),
         contentScale = ContentScale.FillBounds,
         contentDescription = "Movie poster",

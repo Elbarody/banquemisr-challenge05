@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class MovieDetails(
     @SerializedName("id") var id: Int? = null,
     @SerializedName("genres") var genres: ArrayList<Genres> = arrayListOf(),
-    @SerializedName("original_title") var originalTitle: String? = null,
+    @SerializedName("title") var title: String? = null,
     @SerializedName("overview") var overview: String? = null,
     @SerializedName("poster_path") var posterPath: String? = null,
     @SerializedName("production_companies") var productionCompanies: ArrayList<ProductionCompanies> = arrayListOf(),

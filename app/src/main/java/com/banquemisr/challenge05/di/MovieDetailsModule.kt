@@ -5,6 +5,8 @@ import com.banquemisr.challenge05.data.remote.moviedetails.MovieDetailsRemoteDat
 import com.banquemisr.challenge05.data.remote.moviedetails.MovieDetailsRemoteDataSourceImp
 import com.banquemisr.challenge05.data.repo.moviedetails.MovieDetailsRepo
 import com.banquemisr.challenge05.data.repo.moviedetails.MovieDetailsRepoImp
+import com.banquemisr.challenge05.presenter.moviedetails.MoviesDetailsViewModel
+import com.banquemisr.challenge05.presenter.movieslist.MoviesListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -13,4 +15,6 @@ val movieDetailsModule = module {
     single { get<Retrofit>().create(MovieDetailsApi::class.java) }
     single<MovieDetailsRemoteDataSource> { MovieDetailsRemoteDataSourceImp(get()) }
     single<MovieDetailsRepo> { MovieDetailsRepoImp(get()) }
+    viewModel { MoviesDetailsViewModel(get()) }
+
 }

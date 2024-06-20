@@ -7,21 +7,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.banquemisr.challenge05.R
+import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun MovieDetailsPoster() {
+fun MovieDetailsPoster(posterPath: String?) {
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
-    val imageHeight = screenHeight * 0.3f
+    val imageHeight = screenHeight * 0.4f
 
     Image(
         modifier = Modifier
             .fillMaxWidth()
             .height(imageHeight),
-        painter = painterResource(id = R.drawable.ic_launcher_background),
+        painter = rememberAsyncImagePainter(model = posterPath),
         contentDescription = null,
         contentScale = ContentScale.FillBounds
     )
@@ -30,5 +29,5 @@ fun MovieDetailsPoster() {
 @Composable
 @Preview
 fun MovieDetailsPosterPreview() {
-    MovieDetailsPoster()
+    MovieDetailsPoster("")
 }
