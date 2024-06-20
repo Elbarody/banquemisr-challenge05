@@ -15,15 +15,28 @@ val MovieTypography = Typography(
     fontSize = 28.sp
   ),
   titleMedium = TextStyle(
-    fontFamily = FontFamily.Default,
+    fontFamily = FontFamily.Cursive,
     fontWeight = FontWeight.SemiBold,
     color = Color.DarkGray,
     fontSize = 21.sp
   ),
+  titleSmall = TextStyle(
+    fontFamily = FontFamily.Cursive,
+    fontWeight = FontWeight.SemiBold,
+    color = Color.DarkGray,
+    fontSize = 16.sp
+  ),
   bodyMedium = TextStyle(
-    fontFamily = FontFamily.Default,
+    fontFamily = FontFamily.Cursive,
     fontWeight = FontWeight.Normal,
     color = Color.Gray,
     fontSize = 16.sp
+  ),
+
+  bodySmall = TextStyle(
+    fontFamily = FontFamily.Cursive,
+    fontWeight = FontWeight.Normal,
+    color = Color.Gray,
+    fontSize = 14.sp
   ),
 )
