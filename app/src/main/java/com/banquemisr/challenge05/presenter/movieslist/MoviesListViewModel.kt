@@ -3,7 +3,7 @@ package com.banquemisr.challenge05.presenter.movieslist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.banquemisr.challenge05.data.entity.MovieListItem
-import com.banquemisr.challenge05.data.repo.MoviesListRepo
+import com.banquemisr.challenge05.data.repo.movieslist.MoviesListRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,6 +1,7 @@
-package com.banquemisr.challenge05.app.mainkoinmodule
+package com.banquemisr.challenge05.app
 
 import android.app.Application
+import com.banquemisr.challenge05.di.movieDetailsModule
 import com.banquemisr.challenge05.di.moviesListModule
 import com.banquemisr.challenge05.di.remoteModule
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +14,8 @@ fun startKoin(application: Application) {
         modules(
             listOf(
                 remoteModule,
-                moviesListModule
+                moviesListModule,
+                movieDetailsModule
             )
         )
     }

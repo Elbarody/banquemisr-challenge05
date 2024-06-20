@@ -1,4 +1,4 @@
-package com.banquemisr.challenge05.data.repo
+package com.banquemisr.challenge05.data.repo.movieslist
 
 import com.banquemisr.challenge05.data.entity.MoviesListResponse
 
