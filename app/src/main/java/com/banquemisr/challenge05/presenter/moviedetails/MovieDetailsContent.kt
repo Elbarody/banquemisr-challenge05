@@ -26,6 +26,7 @@ fun MovieDetailsContent(paddingValues: PaddingValues) {
         MovieDetailsTitle()
         RunTimeAndReleaseDate()
         MovieDetailsDescription()
+        GenreSection()
     }
 }
 
