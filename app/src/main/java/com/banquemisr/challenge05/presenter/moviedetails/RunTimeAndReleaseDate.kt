@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.banquemisr.challenge05.R
 import com.banquemisr.challenge05.utility.formatDateToMonthDayYear
 import com.banquemisr.challenge05.utility.formatToMinutesAndHours
-import java.util.Locale
+import com.banquemisr.challenge05.utility.uitheme.MovieTypography
 
 @Composable
 fun RunTimeAndReleaseDate() {
@@ -39,10 +38,10 @@ fun RunTimeAndReleaseDate() {
 fun RunTimeData(){
     val spannableString = buildAnnotatedString{
         val style = SpanStyle(
-            color = MaterialTheme.typography.titleSmall.color,
-            fontWeight = MaterialTheme.typography.titleSmall.fontWeight,
-            fontSize = MaterialTheme.typography.titleSmall.fontSize,
-            fontFamily = MaterialTheme.typography.titleSmall.fontFamily
+            color = MovieTypography.titleSmall.color,
+            fontWeight = MovieTypography.titleSmall.fontWeight,
+            fontSize = MovieTypography.titleSmall.fontSize,
+            fontFamily = MovieTypography.titleSmall.fontFamily
         )
         withStyle(style){
             append(stringResource(R.string.runtime))
@@ -61,10 +60,10 @@ fun RunTimeData(){
 fun ReleaseDateData(){
     val spannableString = buildAnnotatedString{
         val style = SpanStyle(
-            color = MaterialTheme.typography.titleSmall.color,
-            fontWeight = MaterialTheme.typography.titleSmall.fontWeight,
-            fontSize = MaterialTheme.typography.titleSmall.fontSize,
-            fontFamily = MaterialTheme.typography.titleSmall.fontFamily
+            color = MovieTypography.titleSmall.color,
+            fontWeight = MovieTypography.titleSmall.fontWeight,
+            fontSize = MovieTypography.titleSmall.fontSize,
+            fontFamily = MovieTypography.titleSmall.fontFamily
         )
         withStyle(style){
             append(stringResource(R.string.release_date))
