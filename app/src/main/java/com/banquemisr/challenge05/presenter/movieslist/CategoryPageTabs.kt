@@ -14,35 +14,27 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CategoriesPageTabs(tabsList: List<String>, selectedIndex: Int, onTabSelected: (Int) -> Unit) {
-    ScrollableTabRow(
-        selectedTabIndex = selectedIndex,
+    ScrollableTabRow(selectedTabIndex = selectedIndex,
         divider = {},
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth()
             .background(
-                color = Color.White,
-                shape = RoundedCornerShape(size = 12.dp)
+                color = Color.White, shape = RoundedCornerShape(size = 12.dp)
             ),
-        indicator = {}
-    ) {
+        indicator = {}) {
         tabsList.forEachIndexed { index, textString ->
             val selected = selectedIndex == index
             Tab(modifier = Modifier
                 .background(
                     if (selected) Color.White
-                    else Color.Transparent,
-                    shape = RoundedCornerShape(12.dp)
+                    else Color.Transparent, shape = RoundedCornerShape(12.dp)
                 )
-                .clip(shape = RoundedCornerShape(12.dp)),
-                onClick = {
-                    onTabSelected(index)
-                },
-                selectedContentColor = Color.Transparent,
-                selected = selected,
-                text = {
-                    TabTextView(selected, textString)
-                })
+                .clip(shape = RoundedCornerShape(12.dp)), onClick = {
+                onTabSelected(index)
+            }, selectedContentColor = Color.Transparent, selected = selected, text = {
+                TabTextView(selected, textString)
+            })
         }
     }
 }

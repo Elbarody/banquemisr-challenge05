@@ -12,14 +12,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.banquemisr.challenge05.data.entity.MovieListItem
 import org.koin.androidx.compose.get
 
 @Composable
 fun MoviesListWithTabScreen(
-    viewModel: MoviesListViewModel,
-    onNavigateToMyScreen: () -> Unit
-){
+    viewModel: MoviesListViewModel, onNavigateToMovieDetails: () -> Unit
+) {
     val stateNowDisplay by viewModel.stateNowDisplay.collectAsState()
     val statePopular by viewModel.statePopular.collectAsState()
     val stateUpcoming by viewModel.stateUpcoming.collectAsState()
@@ -52,6 +50,6 @@ fun MoviesListWithTabScreen(
 
 @Composable
 @Preview
-private fun MoviesListWithTabScreenPreview(){
-    MoviesListWithTabScreen(viewModel = MoviesListViewModel(get()), onNavigateToMyScreen = { })
+private fun MoviesListWithTabScreenPreview() {
+    MoviesListWithTabScreen(viewModel = MoviesListViewModel(get()), onNavigateToMovieDetails = { })
 }

@@ -76,7 +76,5 @@ sealed class NavHomeViewModelSideEffect {
 }
 
 enum class MovieListType(val type: String) {
-     NOW_PLAYING("now_playing"),
-     POPULAR("popular"),
-     UPCOMING("upcoming")
+    NOW_PLAYING("now_playing"), POPULAR("popular"), UPCOMING("upcoming")
 }

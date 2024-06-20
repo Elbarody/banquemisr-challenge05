@@ -18,8 +18,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun CategoriesTabLayout(content: @Composable (Int) -> Unit) {
 
-    val list = listOf(stringResource(R.string.now_playing),
-        stringResource(R.string.popular), stringResource(R.string.upcoming)
+    val list = listOf(
+        stringResource(R.string.now_playing),
+        stringResource(R.string.popular),
+        stringResource(R.string.upcoming)
     )
 
     val pagerState = rememberPagerState(pageCount = { list.size })

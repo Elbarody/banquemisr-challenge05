@@ -15,17 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
-import com.banquemisr.challenge05.R
 import com.banquemisr.challenge05.data.entity.MovieListItem
-import com.banquemisr.challenge05.utility.network.RemoteConstants
 
 @Composable
 fun MovieItem(movieListItem: MovieListItem) {
@@ -93,5 +89,5 @@ private fun MovieDate(releaseDate: String) {
 @Composable
 @Preview
 private fun MovieItemPreview() {
-    MovieItem(movieListItem = MovieListItem(0,"","",""))
+    MovieItem(movieListItem = MovieListItem(0, "", "", ""))
 }

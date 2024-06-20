@@ -1,9 +1,7 @@
 package com.banquemisr.challenge05.presenter.movieslist
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -14,7 +12,9 @@ import com.banquemisr.challenge05.data.entity.MovieListItem
 
 @Composable
 fun MoviesList(movies: List<MovieListItem>) {
-    LazyRow(modifier = Modifier, horizontalArrangement = Arrangement.spacedBy(6.dp),
+    LazyRow(
+        modifier = Modifier,
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
         contentPadding = PaddingValues(4.dp),
         state = rememberLazyListState()
     ) {
@@ -27,5 +27,5 @@ fun MoviesList(movies: List<MovieListItem>) {
 @Composable
 @Preview
 private fun MoviesListPreview() {
-    MoviesList(movies = listOf() )
+    MoviesList(movies = listOf())
 }

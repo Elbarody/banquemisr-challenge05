@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TabTextView(isSelected: Boolean, couponsTitle: String) {
+fun TabTextView(isSelected: Boolean, categoryTitle: String) {
     Text(
         modifier = Modifier
             .fillMaxWidth()
@@ -25,7 +25,7 @@ fun TabTextView(isSelected: Boolean, couponsTitle: String) {
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(horizontal = 10.dp, vertical = 4.dp),
-        text = couponsTitle,
+        text = categoryTitle,
         style = TextStyle(
             fontSize = 14.sp,
             fontFamily = FontFamily.Serif,
