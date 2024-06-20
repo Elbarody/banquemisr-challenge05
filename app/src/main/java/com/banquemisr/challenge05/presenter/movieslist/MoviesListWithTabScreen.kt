@@ -16,7 +16,7 @@ import org.koin.androidx.compose.get
 
 @Composable
 fun MoviesListWithTabScreen(
-    viewModel: MoviesListViewModel, onNavigateToMovieDetails: () -> Unit
+    viewModel: MoviesListViewModel, onNavigateToMovieDetails: (Int) -> Unit
 ) {
     val stateNowDisplay by viewModel.stateNowDisplay.collectAsState()
     val statePopular by viewModel.statePopular.collectAsState()
@@ -39,9 +39,17 @@ fun MoviesListWithTabScreen(
                 }
 
                 when (listType) {
-                    MovieListType.NOW_PLAYING.type -> MoviesList(stateNowDisplay.movies)
-                    MovieListType.POPULAR.type -> MoviesList(statePopular.movies)
-                    MovieListType.UPCOMING.type -> MoviesList(stateUpcoming.movies)
+                    MovieListType.NOW_PLAYING.type -> MoviesList(stateNowDisplay.movies) {movieId ->
+                        onNavigateToMovieDetails.invoke(movieId)
+                    }
+
+                    MovieListType.POPULAR.type -> MoviesList(statePopular.movies) {movieId ->
+                        onNavigateToMovieDetails.invoke(movieId)
+                    }
+
+                    MovieListType.UPCOMING.type -> MoviesList(stateUpcoming.movies) {movieId ->
+                        onNavigateToMovieDetails.invoke(movieId)
+                    }
                 }
             }
         }

@@ -24,8 +24,8 @@ import coil.compose.rememberAsyncImagePainter
 import com.banquemisr.challenge05.data.entity.MovieListItem
 
 @Composable
-fun MovieItem(movieListItem: MovieListItem) {
-    Card {
+fun MovieItem(movieListItem: MovieListItem, onItemClick: (Int) -> Unit) {
+    Card(onClick = { onItemClick(movieListItem.id) }) {
         Column(
             modifier = Modifier
                 .width(200.dp)
@@ -89,5 +89,5 @@ private fun MovieDate(releaseDate: String) {
 @Composable
 @Preview
 private fun MovieItemPreview() {
-    MovieItem(movieListItem = MovieListItem(0, "", "", ""))
+    MovieItem(movieListItem = MovieListItem(0, "", "", "")){}
 }

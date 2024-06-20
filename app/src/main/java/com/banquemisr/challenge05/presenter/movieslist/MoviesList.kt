@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import com.banquemisr.challenge05.data.entity.MovieListItem
 
 @Composable
-fun MoviesList(movies: List<MovieListItem>) {
+fun MoviesList(movies: List<MovieListItem>,onItemClick: (Int) -> Unit) {
     LazyRow(
         modifier = Modifier,
         horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -19,7 +19,7 @@ fun MoviesList(movies: List<MovieListItem>) {
         state = rememberLazyListState()
     ) {
         items(movies.size) { index ->
-            MovieItem(movies[index])
+            MovieItem(movies[index], onItemClick)
         }
     }
 }
@@ -27,5 +27,5 @@ fun MoviesList(movies: List<MovieListItem>) {
 @Composable
 @Preview
 private fun MoviesListPreview() {
-    MoviesList(movies = listOf())
+    MoviesList(movies = listOf()){}
 }
