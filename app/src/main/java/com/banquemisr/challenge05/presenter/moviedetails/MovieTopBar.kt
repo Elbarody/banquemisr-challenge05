@@ -36,7 +36,6 @@ fun MovieTopBar() {
             contentDescription = null
         )
 
-
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = "Movie Details",
