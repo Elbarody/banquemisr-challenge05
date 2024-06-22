@@ -16,31 +16,34 @@ import java.io.IOException
 class NowPlayingMoviesRemoteMediator(
     private val remoteDataSource: MoviesListRemoteDataSource, private val movieDb: MoviesDatabase
 ) : RemoteMediator<Int, NowPlayingMovie>() {
+    private var nextPageNumber = 1 
+    private var totalPages: Int? = null
 
     override suspend fun load(
-        loadType: LoadType, state: PagingState<Int, NowPlayingMovie>
+        loadType: LoadType,
+        state: PagingState<Int, NowPlayingMovie>
     ): MediatorResult {
-        return try {
-            val loadKey = when (loadType) {
-                LoadType.REFRESH -> 1
-                LoadType.PREPEND -> return MediatorResult.Success(
-                    endOfPaginationReached = true
-                )
-
+        try {
+            val pageToLoad = when (loadType) {
+                LoadType.REFRESH -> {
+                    nextPageNumber = 1  
+                    1
+                }
+                LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull()
-                    if (lastItem == null) {
-                        1
-                    } else {
-                        (lastItem.id / state.config.pageSize) + 1
+                    if (nextPageNumber > (totalPages ?: Int.MAX_VALUE)) {
+                        return MediatorResult.Success(endOfPaginationReached = true)
                     }
+                    nextPageNumber
                 }
             }
 
-            val movies = remoteDataSource.getMoviesList(
-                page = loadKey,
+            val response = remoteDataSource.getMoviesList(
+                page = pageToLoad,
                 moviesType = "now_playing"
-            ).moviesList
+            )
+            val movies = response.moviesList
+            totalPages = response.totalPages
 
             movieDb.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -49,10 +52,9 @@ class NowPlayingMoviesRemoteMediator(
                 val movieEntities = movies.map { it.toMovieNowPlayingEntity() }
                 movieDb.nowPlayingMoviesDao().insertAllNowPlayingMovies(movieEntities)
             }
+            nextPageNumber++
 
-            MediatorResult.Success(
-                endOfPaginationReached = movies.isEmpty()
-            )
+            return MediatorResult.Success(endOfPaginationReached = movies.isEmpty())
         } catch (error: IOException) {
             return MediatorResult.Error(error)
         } catch (error: HttpException) {
@@ -60,4 +62,3 @@ class NowPlayingMoviesRemoteMediator(
         }
     }
 }
-
