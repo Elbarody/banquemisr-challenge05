@@ -18,6 +18,9 @@ navigationUiKtx = "2.7.7"
 retrofitVersion = "2.9.0"
 activity = "1.8.0"
 okhttp3 ="4.11.0"
+paging_version = "3.3.0"
+roomKtx = "2.6.1"
+
 [libraries]
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
@@ -47,6 +50,13 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity" }
 okhttp3-okhttp ={group ="com.squareup.okhttp3" , name="okhttp",version.ref ="okhttp3"}
 okhttp3-logging ={group ="com.squareup.okhttp3" , name="logging-interceptor",version.ref ="okhttp3"}
+androidx-paging = {group="androidx.paging",name="paging-common",version.ref="paging_version"}
+androidx-paging-compose = {group="androidx.paging",name="paging-compose",version.ref="paging_version"}
+androidx-room = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomKtx" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomKtx" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }

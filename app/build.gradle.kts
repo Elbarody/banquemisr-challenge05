@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
+
 }
 
 android {
@@ -66,15 +68,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Kotlin
-    /*implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.androidx.fragment.ktx)*/
-
-
     // Dependency Injection
     implementation(libs.koin.android)
-    implementation(libs.koin.compose)/*implementation(libs.koin.androidx.viewmodel)*/
+    implementation(libs.koin.compose)
     testImplementation(libs.koin.test)
 
 
@@ -99,5 +95,15 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation("io.insert-koin:koin-androidx-compose:3.2.0")
+
+    //paging
+    implementation(libs.androidx.paging)
+    implementation(libs.androidx.paging.compose)
+
+    //room
+    implementation(libs.androidx.room)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler)
+    implementation("androidx.room:room-paging:2.6.1")
 }
