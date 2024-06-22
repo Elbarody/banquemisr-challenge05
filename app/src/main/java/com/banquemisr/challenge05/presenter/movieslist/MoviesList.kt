@@ -31,7 +31,7 @@ fun MoviesList(movies: LazyPagingItems<MovieListItem>, onItemClick: (Int) -> Uni
                 state = rememberLazyListState()
             ) {
                 items(movies.itemCount) { index ->
-                    MovieItem(movies[index], onItemClick)
+                    if (movies[index] != null) MovieItem(movies[index], onItemClick)
                 }
 
                 if (movies.loadState.append == LoadState.Loading) {
