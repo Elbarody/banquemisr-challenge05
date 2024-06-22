@@ -1,4 +1,4 @@
-package com.banquemisr.challenge05.data.repo.movieslist
+package com.banquemisr.challenge05.data.remote.mediator
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -6,28 +6,28 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.banquemisr.challenge05.data.local.MoviesDatabase
-import com.banquemisr.challenge05.data.local.PopularMovie
-import com.banquemisr.challenge05.data.mappers.toMovieNowPlayingEntity
+import com.banquemisr.challenge05.data.local.UpcomingMovie
+import com.banquemisr.challenge05.data.mappers.toUpcomingMovieEntity
 import com.banquemisr.challenge05.data.remote.movieList.MoviesListRemoteDataSource
 import retrofit2.HttpException
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
-class PopularMoviesRemoteMediator(
+class UpcomingMoviesRemoteMediator(
     private val remoteDataSource: MoviesListRemoteDataSource, private val movieDb: MoviesDatabase
-) : RemoteMediator<Int, PopularMovie>() {
+) : RemoteMediator<Int, UpcomingMovie>() {
 
     private var nextPageNumber = 1 
     private var totalPages: Int? = null
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, PopularMovie>
+        state: PagingState<Int, UpcomingMovie>
     ): MediatorResult {
         try {
             val pageToLoad = when (loadType) {
                 LoadType.REFRESH -> {
-                    nextPageNumber = 1  
+                    nextPageNumber = 1
                     1
                 }
 
@@ -42,20 +42,20 @@ class PopularMoviesRemoteMediator(
 
             val response = remoteDataSource.getMoviesList(
                 page = pageToLoad,
-                moviesType = "popular"
+                moviesType = "upcoming"
             )
             val movies = response.moviesList
             totalPages = response.totalPages
 
             movieDb.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    movieDb.nowPlayingMoviesDao().clearAllNowPlayingMovies()
+                    movieDb.upcomingMoviesDao().clearUpcomingMovies()
                 }
-                val movieEntities = movies.map { it.toMovieNowPlayingEntity() }
-                movieDb.nowPlayingMoviesDao().insertAllNowPlayingMovies(movieEntities)
+                val movieEntities = movies.map { it.toUpcomingMovieEntity() }
+                movieDb.upcomingMoviesDao().insertAllUpcomingMovies(movieEntities)
             }
-
             nextPageNumber++
+
             return MediatorResult.Success(endOfPaginationReached = movies.isEmpty())
         } catch (error: IOException) {
             return MediatorResult.Error(error)
