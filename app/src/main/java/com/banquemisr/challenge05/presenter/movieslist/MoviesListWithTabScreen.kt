@@ -32,7 +32,7 @@ fun MoviesListWithTabScreen(
         viewModel.moviesPopularFlow.collectAsLazyPagingItems()
 
     val upcomingMoviesListState: LazyPagingItems<MovieListItem> =
-        viewModel.moviesUpcaomnFlow.collectAsLazyPagingItems()
+        viewModel.moviesUpcomingFlow.collectAsLazyPagingItems()
 
     val context = LocalContext.current
     LaunchedEffect(key1 = nowPlayingMoviesListState.loadState) {
