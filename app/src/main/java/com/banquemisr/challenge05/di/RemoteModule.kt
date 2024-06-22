@@ -26,10 +26,10 @@ val remoteModule = module{
             .writeTimeout(RemoteConstants.WRITE_TIMEOUT, TimeUnit.SECONDS)
             .protocols(protocols)
 
-        if (BuildConfig.DEBUG) {
+        //if (BuildConfig.DEBUG) {
             builder.addInterceptor(MockInterceptor())
             builder.addNetworkInterceptor(get<HttpLoggingInterceptor>())
-        }
+        //}
         builder.build()
     }
 

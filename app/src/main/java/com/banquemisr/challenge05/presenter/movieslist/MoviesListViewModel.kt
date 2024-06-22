@@ -2,13 +2,15 @@ package com.banquemisr.challenge05.presenter.movieslist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.banquemisr.challenge05.data.entity.MovieListItem
+import com.banquemisr.challenge05.data.mappers.toMovie
 import com.banquemisr.challenge05.data.repo.movieslist.MoviesListRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.map
 
 class MoviesListViewModel(private val moviesListRepo: MoviesListRepo) : ViewModel() {
 
@@ -21,6 +23,8 @@ class MoviesListViewModel(private val moviesListRepo: MoviesListRepo) : ViewMode
     private val _stateUpcoming = MutableStateFlow(MovieCollectionState())
     val stateUpcoming: StateFlow<MovieCollectionState> = _stateUpcoming.asStateFlow()
 
+    //this implementation is working for movies list
+    /*@OptIn(ExperimentalPagingApi::class)
     fun fetchListMovies(type: String) {
         val currentPage: Int = when (type) {
             MovieListType.NOW_PLAYING.type -> _stateNowDisplay.value.currentPage
@@ -36,13 +40,13 @@ class MoviesListViewModel(private val moviesListRepo: MoviesListRepo) : ViewMode
             else -> null
         }
 
-        /*if (totalPages != null && currentPage >= totalPages) return*/
+        *//*if (totalPages != null && currentPage >= totalPages) return*//*
 
         val nextPage: Int = if (totalPages == null) 1 else currentPage.plus(1)
 
         viewModelScope.launch {
             kotlin.runCatching {
-                moviesListRepo.getMoviesList(type, nextPage)
+                moviesListRepo.getMoviesList()
             }.onSuccess { moviesResponse ->
                 val moviesState = when (type) {
                     MovieListType.NOW_PLAYING.type -> _stateNowDisplay
@@ -62,7 +66,17 @@ class MoviesListViewModel(private val moviesListRepo: MoviesListRepo) : ViewMode
                 NavHomeViewModelSideEffect.ShowErrorToast(it.message)
             }
         }
-    }
+    }*/
+
+    val moviesNowPlayFlow = moviesListRepo.getNowPlayingMoviesList()
+        .map { pagingData -> pagingData.map { it.toMovie() } }.cachedIn(viewModelScope)
+
+    val moviesPopularFlow = moviesListRepo.getPopularMoviesList()
+        .map { pagingData -> pagingData.map { it.toMovie() } }.cachedIn(viewModelScope)
+
+    val moviesUpcaomnFlow = moviesListRepo.getUpcomingMoviesList()
+        .map { pagingData -> pagingData.map { it.toMovie() } }.cachedIn(viewModelScope)
+
 }
 
 data class MovieCollectionState(
@@ -70,10 +84,6 @@ data class MovieCollectionState(
     val movies: List<MovieListItem> = listOf(),
     val totalPages: Int? = null,
 )
-
-sealed class NavHomeViewModelSideEffect {
-    data class ShowErrorToast(val message: String? = null) : NavHomeViewModelSideEffect()
-}
 
 enum class MovieListType(val type: String) {
     NOW_PLAYING("now_playing"), POPULAR("popular"), UPCOMING("upcoming")

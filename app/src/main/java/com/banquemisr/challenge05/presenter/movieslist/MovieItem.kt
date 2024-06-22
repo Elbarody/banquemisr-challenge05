@@ -22,10 +22,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.banquemisr.challenge05.data.entity.MovieListItem
+import com.banquemisr.challenge05.data.local.MovieEntity
 
 @Composable
-fun MovieItem(movieListItem: MovieListItem, onItemClick: (Int) -> Unit) {
-    Card(onClick = { onItemClick(movieListItem.id) }) {
+fun MovieItem(movieListItem: MovieListItem?, onItemClick: (Int) -> Unit) {
+    Card(onClick = { onItemClick(movieListItem?.id ?: 0) }) {
         Column(
             modifier = Modifier
                 .width(200.dp)
@@ -33,9 +34,9 @@ fun MovieItem(movieListItem: MovieListItem, onItemClick: (Int) -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            MovieImage(movieListItem.image)
-            MovieTitle(movieListItem.title)
-            MovieDate(movieListItem.releaseDate)
+            MovieImage(movieListItem?.image.orEmpty())
+            MovieTitle(movieListItem?.title.orEmpty())
+            MovieDate(movieListItem?.releaseDate.orEmpty())
         }
     }
 }
