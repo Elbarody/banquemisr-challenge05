@@ -57,7 +57,6 @@ fun MoviesListWithTabScreen(
 
                 when (listType) {
                     MovieListType.NOW_PLAYING.type -> {
-                        if ((nowPlayingMoviesListState.loadState.refresh is LoadState.Loading).not())
                             MoviesList(nowPlayingMoviesListState) { movieId ->
                                 onNavigateToMovieDetails.invoke(movieId)
                             }

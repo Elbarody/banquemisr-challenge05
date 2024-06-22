@@ -21,7 +21,6 @@ fun MoviesList(movies: LazyPagingItems<MovieListItem>, onItemClick: (Int) -> Uni
         state = rememberLazyListState()
     ) {
         items(movies.itemCount) { index ->
-            if (movies.loadState.refresh is LoadState.NotLoading)
             MovieItem(movies[index], onItemClick)
         }
     }
