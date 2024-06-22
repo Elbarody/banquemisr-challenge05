@@ -1,4 +1,4 @@
-package com.banquemisr.challenge05.data.repo.movieslist.nowdisplay
+package com.banquemisr.challenge05.domin.nowdisplay_usecase
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingData
@@ -8,11 +8,11 @@ import com.banquemisr.challenge05.data.remote.mediator.NowPlayingMoviesRemoteMed
 import com.banquemisr.challenge05.data.repo.movieslist.MoviesListRepo
 import kotlinx.coroutines.flow.Flow
 
-class NowDisplayRepoImp(
+class NowPlayUseCaseImp(
     private val moviesListRepo: MoviesListRepo,
     private val nowPlayingMoviesRemoteMediator: NowPlayingMoviesRemoteMediator,
     private val nowPlayingMoviesDao: NowPlayingMoviesDao
-) : NowDisplayRepo {
+) : NowPlayUseCase {
     @OptIn(ExperimentalPagingApi::class)
     override fun getNowPlayingMoviesList(): Flow<PagingData<NowPlayingMovie>> =
         moviesListRepo.createPagerForMovies(nowPlayingMoviesRemoteMediator) {

@@ -5,18 +5,24 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.banquemisr.challenge05.data.mappers.toMovie
-import com.banquemisr.challenge05.data.repo.movieslist.MoviesListRepo
+import com.banquemisr.challenge05.domin.nowdisplay_usecase.NowPlayUseCase
+import com.banquemisr.challenge05.domin.popular_usecase.PopularListUseCase
+import com.banquemisr.challenge05.domin.upcoming_usecase.UpcomingListUseCase
 import kotlinx.coroutines.flow.map
 
-class MoviesListViewModel(private val moviesListRepo: MoviesListRepo) : ViewModel() {
+class MoviesListViewModel(
+    nowPlayingUseCase: NowPlayUseCase,
+    upcomingUseCase: UpcomingListUseCase,
+    popularUseCase: PopularListUseCase
+) : ViewModel() {
 
-    val moviesNowPlayFlow = moviesListRepo.getNowPlayingMoviesList()
+    val moviesNowPlayFlow = nowPlayingUseCase.getNowPlayingMoviesList()
         .map { pagingData -> pagingData.map { it.toMovie() } }.cachedIn(viewModelScope)
 
-    val moviesPopularFlow = moviesListRepo.getPopularMoviesList()
+    val moviesPopularFlow = popularUseCase.getPopularMoviesList()
         .map { pagingData -> pagingData.map { it.toMovie() } }.cachedIn(viewModelScope)
 
-    val moviesUpcomingFlow = moviesListRepo.getUpcomingMoviesList()
+    val moviesUpcomingFlow = upcomingUseCase.getUpcomingMoviesList()
         .map { pagingData -> pagingData.map { it.toMovie() } }.cachedIn(viewModelScope)
 
 }

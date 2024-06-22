@@ -83,5 +83,5 @@ fun MoviesListWithTabScreen(
 @Composable
 @Preview
 private fun MoviesListWithTabScreenPreview() {
-    MoviesListWithTabScreen(viewModel = MoviesListViewModel(get()), onNavigateToMovieDetails = { })
+    MoviesListWithTabScreen(viewModel = MoviesListViewModel(get(), get(), get()), onNavigateToMovieDetails = { })
 }

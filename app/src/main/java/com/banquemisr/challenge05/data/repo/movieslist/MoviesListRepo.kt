@@ -12,9 +12,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MoviesListRepo {
 
-    fun getPopularMoviesList(): Flow<PagingData<PopularMovie>>
-
-    fun getUpcomingMoviesList(): Flow<PagingData<UpcomingMovie>>
     @OptIn(ExperimentalPagingApi::class)
     fun <T : Any> createPagerForMovies(
         remoteMediator: RemoteMediator<Int, T>,
