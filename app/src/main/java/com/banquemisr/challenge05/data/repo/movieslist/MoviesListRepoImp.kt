@@ -23,7 +23,8 @@ class MoviesListRepoImp : MoviesListRepo {
         config = PagingConfig(
             pageSize = 20,
             enablePlaceholders = false,
-            prefetchDistance = 2
+            prefetchDistance = 1,
+            initialLoadSize = 2
         ),
         remoteMediator = remoteMediator,
         pagingSourceFactory = pagingSourceFactory
