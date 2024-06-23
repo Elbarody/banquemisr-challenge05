@@ -106,4 +106,14 @@ dependencies {
     annotationProcessor(libs.androidx.room.compiler)
     kapt(libs.androidx.room.compiler)
     implementation("androidx.room:room-paging:2.6.1")
+
+    testImplementation("androidx.arch.core:core-testing:2.1.0")
+
+    //mock
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockito.core)
+    androidTestImplementation(libs.mockito.kotlin)
+    androidTestImplementation(libs.mockk)
 }

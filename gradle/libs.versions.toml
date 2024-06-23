@@ -20,6 +20,9 @@ activity = "1.8.0"
 okhttp3 ="4.11.0"
 paging_version = "3.3.0"
 roomKtx = "2.6.1"
+mockitoCore = "3.4.5"
+mockitoKotlin = "3.2.0"
+mockk ="1.13.4"
 
 [libraries]
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
@@ -55,6 +58,9 @@ androidx-paging-compose = {group="androidx.paging",name="paging-compose",version
 androidx-room = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomKtx" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomKtx" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
